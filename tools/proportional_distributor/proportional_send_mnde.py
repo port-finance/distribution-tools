@@ -1,3 +1,5 @@
+import re
+import subprocess
 import requests
 from datetime import datetime
 from proportional_distributor import transfer
@@ -28,11 +30,18 @@ env = {
   "RPC_URL": "https://port-finance.rpcpool.com",
 }
 
+total_amount = 13736
+
+result = subprocess.run(['spl-token', 'account-info',  env['TOKEN_MINT']], stdout=subprocess.PIPE)
+token_amount = re.search("(?<=Balance: )\d", result.stdout.decode('utf-8')).group(0)
+if int(token_amount) < total_amount:
+  print(f'Not enough token: {token_amount} required: {total_amount}')
+  exit(1)
 
 transfer(
-  file_name=file_name,
+  input_path=file_name,
   interactive=False,
-  drop_amount=13736,
+  drop_amount=total_amount,
   fund_recipient=True,
   allow_unfunded_recipient=False,
   env=env
