@@ -98,7 +98,6 @@ def single_transaction_prompt(full_cmd, amount, recipient, decimals):
 
 
 def gen_logfile(name, current_time, folder_prefix):
-    print(folder_prefix, current_time, name)
     filename = "./" + folder_prefix + current_time + "/" + name
     os.makedirs(os.path.dirname(filename), exist_ok=True)
     # Don't open, but create it anyway
