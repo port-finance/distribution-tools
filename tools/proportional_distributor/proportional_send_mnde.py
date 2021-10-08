@@ -33,7 +33,7 @@ env = {
 total_amount = 13736
 
 result = subprocess.run(['spl-token', 'account-info',  env['TOKEN_MINT']], stdout=subprocess.PIPE)
-token_amount = re.search("(?<=Balance: )\d", result.stdout.decode('utf-8')).group(0)
+token_amount = re.search(r"(?<=Balance: )\d+\.\d *", result.stdout.decode('utf-8')).group(0)
 if int(token_amount) < total_amount:
   print(f'Not enough token: {token_amount} required: {total_amount}')
   exit(1)
