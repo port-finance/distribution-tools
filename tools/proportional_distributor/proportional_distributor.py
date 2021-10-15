@@ -307,8 +307,21 @@ def main():
         fund_recipient = args.fund_recipient
         allow_unfunded_recipient = args.allow_unfunded_recipient
         RETRY_ON_429 = args.retry_on_429
-        transfer(input_path, interactive, drop_amount, 
-            fund_recipient, allow_unfunded_recipient
+        transfer(
+            input_path, interactive, drop_amount, 
+            fund_recipient, allow_unfunded_recipient,
+            {
+                "TOKEN_MINT": TOKEN_MINT,
+                "TOKEN_DECIMALS": TOKEN_DECIMALS,
+                "LOG_FOLDER_PREFIX": LOG_FOLDER_PREFIX,
+                "FULL_LOGS": FULL_LOGS,
+                "SUCCESS_LOGS": SUCCESS_LOGS,
+                "FAILED_LOGS": FAILED_LOGS,
+                "CANCELED_LOGS": CANCELED_LOGS,
+                "UNCONFIRMED_LOGS": UNCONFIRMED_LOGS,
+                "RETRY_ON_429": args.retry_on_429,
+                "RPC_URL": RPC_URL,
+            }
         )
 
 
@@ -385,8 +398,18 @@ def after(input_file, addr_type):
 
 
 def transfer(input_path, interactive, drop_amount, 
-            fund_recipient, allow_unfunded_recipient):
-    global TOKEN_MINT, TOKEN_DECIMALS, RPC_URL, LOG_FOLDER_PREFIX, FULL_LOGS, SUCCESS_LOGS, FAILED_LOGS, CANCELED_LOGS, UNCONFIRMED_LOGS
+             fund_recipient, allow_unfunded_recipient, env):
+    global RETRY_ON_429
+    TOKEN_MINT = env['TOKEN_MINT'] 
+    TOKEN_DECIMALS = env['TOKEN_DECIMALS']
+    RPC_URL = env['RPC_URL'] 
+    LOG_FOLDER_PREFIX = env['LOG_FOLDER_PREFIX'] 
+    FULL_LOGS = env['FULL_LOGS']
+    SUCCESS_LOGS = env['SUCCESS_LOGS']
+    FAILED_LOGS = env ['FAILED_LOGS']
+    CANCELED_LOGS = env['CANCELED_LOGS']
+    UNCONFIRMED_LOGS = env['UNCONFIRMED_LOGS']
+    RETRY_ON_429 = env['RETRY_ON_429']
     SEPARATOR = "-" * 50
     LOG_SEPARATOR = "-" * 30 + "\n"
     TOO_MANY_REQUESTS = "429 Too Many Requests"

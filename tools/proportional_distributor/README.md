@@ -35,3 +35,9 @@ Ht7nUwAUQwGBQMKabRKMcQUjJa2tFQawp11t7Vm6hKFW,178.9117
 GkJoR3G44KksKaBGrSJcTPhuPVVCg3a9kKUuf1oFNEuT,154.4178
 ...
 ```
+
+### Command to send to investors
+
+```
+python3 tools/proportional-distributor/proportional-distributor.py  transfer -a tools/proportional-distributor/seed_smaller.txt --fund-recipient
+```
