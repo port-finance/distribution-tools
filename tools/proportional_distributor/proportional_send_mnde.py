@@ -26,7 +26,7 @@ env = {
   "FAILED_LOGS": "failed.log",
   "CANCELED_LOGS": "cancelled.log",
   "UNCONFIRMED_LOGS": "unconfirmed.log",
-  "RETRY_ON_429": True,
+  "RETRY_ON_429": False,
   "RPC_URL": "https://port-finance.rpcpool.com",
 }
 
