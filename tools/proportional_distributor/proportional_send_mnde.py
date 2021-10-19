@@ -27,7 +27,7 @@ env = {
   "CANCELED_LOGS": "cancelled.log",
   "UNCONFIRMED_LOGS": "unconfirmed.log",
   "RETRY_ON_429": False,
-  "RPC_URL": "https://port-finance.rpcpool.com",
+  "RPC_URL": "https://api.mainnet-beta.solana.com",
 }
 
 total_amount = 88736
