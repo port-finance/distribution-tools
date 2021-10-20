@@ -30,7 +30,7 @@ env = {
   "RPC_URL": "https://api.mainnet-beta.solana.com",
 }
 
-total_amount = 88736
+total_amount = 88000
 
 result = subprocess.run(['spl-token', 'account-info',  env['TOKEN_MINT']], stdout=subprocess.PIPE)
 token_amount = re.search(r"(?<=Balance: )\d+\.\d *", result.stdout.decode('utf-8')).group(0)
