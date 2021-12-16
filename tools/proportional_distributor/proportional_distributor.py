@@ -467,7 +467,7 @@ def transfer(input_path, interactive, drop_amount,
 
     print()
     try:
-        continue_airdrop_prompt(interactive, SEPARATOR)
+        # continue_airdrop_prompt(interactive, SEPARATOR)
         # Determine factor for proportional drop.
         proportional_factor = total_drop / sum(accounts.values())
 
