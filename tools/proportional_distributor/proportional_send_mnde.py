@@ -42,6 +42,7 @@ if mnde_amount < total_amount:
   print(f'Not enough token: {mnde_amount} required: {total_amount}')
   exit(1)
 
+print(f'Before MNDE balance: {mnde_amount}')
 transfer(
   input_path=file_name,
   interactive=False,
@@ -50,3 +51,5 @@ transfer(
   allow_unfunded_recipient=False,
   env=env
 )
+after_mnde_amount = read_mnde_balance()
+print(f'After MNDE balance: {after_mnde_amount}')
