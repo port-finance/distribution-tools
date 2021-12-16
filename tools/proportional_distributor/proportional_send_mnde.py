@@ -4,6 +4,11 @@ import requests
 from datetime import datetime
 from proportional_distributor import transfer
 
+def read_mnde_balance():
+  result = subprocess.run(['spl-token', 'account-info',  env['TOKEN_MINT']], stdout=subprocess.PIPE)
+  token_amount = re.search(r"(?<=Balance: )\d+\.\d *", result.stdout.decode('utf-8')).group(0)
+  return float(token_amount)
+
 asset_name = "mSOL"
 print("Retrieving mSOL deposit")
 result = requests.get('https://intense-temple-44991.herokuapp.com/collaterals/%s' % asset_name).json()
@@ -32,10 +37,9 @@ env = {
 
 total_amount = 12362
 
-result = subprocess.run(['spl-token', 'account-info',  env['TOKEN_MINT']], stdout=subprocess.PIPE)
-token_amount = re.search(r"(?<=Balance: )\d+\.\d *", result.stdout.decode('utf-8')).group(0)
-if float(token_amount) < total_amount:
-  print(f'Not enough token: {token_amount} required: {total_amount}')
+mnde_amount = read_mnde_balance()
+if mnde_amount < total_amount:
+  print(f'Not enough token: {mnde_amount} required: {total_amount}')
   exit(1)
 
 transfer(
